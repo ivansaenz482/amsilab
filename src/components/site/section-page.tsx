@@ -18,6 +18,7 @@ type SectionPageProps = {
   note?: string;
   ctaHref?: string;
   ctaLabel?: string;
+  children?: ReactNode;
 };
 
 export function SectionPage({
@@ -29,6 +30,7 @@ export function SectionPage({
   note,
   ctaHref = "/contacto",
   ctaLabel = "Solicitar información",
+  children,
 }: SectionPageProps) {
   return (
     <>
@@ -96,6 +98,8 @@ export function SectionPage({
 
           {note ? <p className="demo-note">{note}</p> : null}
         </section>
+
+        {children ? <section className="section-wrap">{children}</section> : null}
 
         <section className="contact-band section-wrap">
           <div>

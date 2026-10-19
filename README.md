@@ -12,15 +12,15 @@ solicitudes de información. No incluye pagos online ni aula virtual.
 - Next.js 16 (App Router) + TypeScript
 - Tailwind CSS 4
 - Lucide React
-- React Hook Form + Zod (siguiente entrega, formularios)
-- Supabase (siguiente entrega, base de datos y autenticación)
-- Resend (siguiente entrega, correo transaccional)
+- React Hook Form + Zod (formulario de solicitudes)
+- Neon PostgreSQL (`@neondatabase/serverless`) para almacenar los leads
 - Vercel + GitHub (despliegue)
 
 ## Desarrollo local
 
 ```bash
 npm install
+cp .env.example .env.local   # completa DATABASE_URL
 npm run dev
 ```
 
@@ -35,44 +35,59 @@ npm run start    # servidor de producción
 npm run lint     # ESLint
 ```
 
+## Variables de entorno
+
+| Variable | Descripción |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | URL pública usada en metadata, sitemap y robots. En Vercel se detecta automáticamente. |
+| `DATABASE_URL` | Cadena de conexión PostgreSQL (Neon o Supabase) para la tabla `leads`. |
+| `LEAD_HASH_SALT` | Sal para anonimizar la IP registrada con cada solicitud. |
+
+## Base de datos
+
+La migración inicial está en `db/migrations/0001_create_leads.sql` y crea la tabla
+`public.leads` (solicitudes) con índices por fecha y correo, además de activar
+Row Level Security.
+
+```bash
+psql "$DATABASE_URL" -f db/migrations/0001_create_leads.sql
+```
+
 ## Estructura
 
 ```text
 src/
-├── app/                 # rutas y metadatos (App Router)
-│   ├── cursos/          # catálogo de formación
-│   ├── talleres/
-│   ├── seminarios/
-│   ├── empresas/
-│   ├── servicios/
-│   ├── recursos/
-│   ├── contacto/
-│   ├── sitemap.ts
-│   └── robots.ts
+├── app/                      # rutas y metadatos (App Router)
+│   ├── api/leads/route.ts    # endpoint del formulario
+│   ├── cursos/               # catálogo y detalle por programa
+│   ├── talleres/ seminarios/ empresas/ servicios/ recursos/
+│   ├── contacto/             # formulario de solicitudes
+│   ├── sitemap.ts robots.ts
 ├── components/
-│   ├── layout/          # navbar y footer
-│   └── site/            # componentes de páginas interiores
-└── lib/
-    └── site.ts          # URL pública del sitio
+│   ├── layout/               # navbar y footer
+│   └── site/                 # componentes de páginas interiores
+├── features/
+│   ├── courses/              # datos, tipos y tarjeta del catálogo
+│   └── leads/                # formulario de solicitudes
+├── lib/                      # utilidades, cliente de base de datos
+└── schemas/                  # validación con Zod
 ```
+
+## Catálogo
+
+Los programas viven en `src/features/courses/data.ts` como datos tipados. Para
+publicar cursos reales basta con editar ese archivo (o conectar una tabla de
+cursos cuando exista el panel administrativo).
 
 ## Contenido pendiente
 
 - Sustituir los programas ilustrativos por cursos, fechas y precios reales.
-- Implementar el formulario de solicitudes con validación y persistencia.
-- Conectar Supabase y Resend.
-- Añadir imágenes industriales definitivas y revisar accesibilidad.
-- Construir el panel administrativo y, más adelante, el aula virtual.
+- Notificaciones por correo al recibir solicitudes (Resend).
+- Panel administrativo para gestionar cursos, solicitudes y eventos.
+- Imágenes industriales definitivas y revisión de accesibilidad.
+- Aula virtual, certificados y pagos online, cuando el negocio lo requiera.
 
 ## Despliegue
 
 El proyecto se despliega en Vercel. Cada push a `main` genera un despliegue de
-producción y cada pull request genera una URL de preview.
-
-Variable opcional:
-
-```text
-NEXT_PUBLIC_SITE_URL=https://tu-dominio.com
-```
-
-Si no se define, se usa automáticamente el dominio de producción de Vercel.
+producción y cada pull request una URL de preview.

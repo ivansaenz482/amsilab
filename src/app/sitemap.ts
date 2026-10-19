@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/site";
+import { getCourseSlugs } from "@/features/courses/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes: Array<{
@@ -16,7 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/contacto", priority: 0.9 },
   ];
 
-  return routes.map((route) => ({
+  const courseRoutes = getCourseSlugs().map((slug) => ({
+    path: `/cursos/${slug}`,
+    priority: 0.7,
+  }));
+
+  return [...routes, ...courseRoutes].map((route) => ({
     url: `${siteUrl}${route.path}`,
     changeFrequency: "monthly",
     priority: route.priority,

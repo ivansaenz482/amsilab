@@ -10,11 +10,12 @@ import {
   Cpu,
   Factory,
   Gauge,
-  Network,
   RadioTower,
 } from "lucide-react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { CourseCard } from "@/features/courses/course-card";
+import { catalogNote, courses } from "@/features/courses/data";
 
 const specialties = [
   {
@@ -47,32 +48,7 @@ const specialties = [
   },
 ];
 
-const programs = [
-  {
-    category: "AUTOMATIZACIÓN",
-    title: "Fundamentos de PLC industrial",
-    level: "Nivel inicial · Intermedio",
-    duration: "Duración por definir",
-    icon: Cpu,
-    number: "01",
-  },
-  {
-    category: "SUPERVISIÓN",
-    title: "Introducción a SCADA y HMI",
-    level: "Nivel inicial",
-    duration: "Duración por definir",
-    icon: Gauge,
-    number: "02",
-  },
-  {
-    category: "TECNOLOGÍA",
-    title: "Redes industriales e Industria 4.0",
-    level: "Nivel inicial · Intermedio",
-    duration: "Duración por definir",
-    icon: Network,
-    number: "03",
-  },
-];
+const featuredCourses = courses.slice(0, 3);
 
 function SectionLabel({ children }: { children: ReactNode }) {
   return (
@@ -213,44 +189,11 @@ export default function Home() {
           </div>
 
           <div className="program-grid">
-            {programs.map((program) => {
-              const Icon = program.icon;
-              return (
-                <article className="program-card" key={program.number}>
-                  <div className="program-art">
-                    <div className="program-art-grid" />
-                    <span className="program-number">
-                      AMSI / {program.number}
-                    </span>
-                    <Icon size={64} strokeWidth={0.9} />
-                    <span className="program-art-caption">
-                      TECHNICAL TRAINING
-                    </span>
-                  </div>
-                  <div className="program-info">
-                    <span className="program-category">
-                      {program.category}
-                    </span>
-                    <h3>{program.title}</h3>
-                    <p>{program.level}</p>
-                    <div className="program-footer">
-                      <span>{program.duration}</span>
-                      <Link
-                        href="/contacto"
-                        aria-label={`Consultar por ${program.title}`}
-                      >
-                        <ArrowUpRight size={19} />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
+            {featuredCourses.map((course) => (
+              <CourseCard key={course.slug} course={course} />
+            ))}
           </div>
-          <p className="demo-note">
-            Programas ilustrativos. Fechas, contenidos y disponibilidad
-            se confirmarán al publicar la oferta comercial.
-          </p>
+          <p className="demo-note">{catalogNote}</p>
         </section>
 
         <section className="corporate">
