@@ -6,7 +6,7 @@ import {
   Network,
   RadioTower,
 } from "lucide-react";
-import type { Course } from "./types";
+import type { Course, CourseSchedule } from "./types";
 
 export const courses: Course[] = [
   {
@@ -19,7 +19,7 @@ export const courses: Course[] = [
     description:
       "Programa introductorio al mundo de los controladores lógicos programables. Se trabaja desde la lógica de control y el cableado de señales hasta la programación estructurada, el diagnóstico de fallas y la puesta en marcha de una celda automatizada.",
     level: "Inicial",
-    duration: "40 horas",
+    hours: 40,
     modalities: ["Presencial", "A medida"],
     icon: Cpu,
     audience: [
@@ -32,6 +32,12 @@ export const courses: Course[] = [
       "Programar bloques básicos y estructuras de control",
       "Configurar entradas y salidas digitales y analógicas",
       "Diagnosticar fallas y realizar puesta en marcha",
+    ],
+    includes: [
+      "Certificado de aprobación",
+      "Material técnico digital",
+      "Práctica sobre equipos de laboratorio",
+      "Acompañamiento durante el programa",
     ],
     modules: [
       {
@@ -59,6 +65,29 @@ export const courses: Course[] = [
         ],
       },
     ],
+    schedules: [
+      {
+        label: "Grupo de tarde",
+        startDate: "2026-11-09",
+        endDate: "2026-12-04",
+        modality: "Presencial",
+        time: "Lunes y miércoles · 18:00 a 21:00",
+        seats: 14,
+      },
+      {
+        label: "Grupo intensivo",
+        startDate: "2027-01-11",
+        endDate: "2027-02-05",
+        modality: "Presencial",
+        time: "Lunes a viernes · 08:00 a 12:00",
+        seats: 10,
+      },
+    ],
+    investment: {
+      usd: 340,
+      unit: "por participante",
+      note: "Incluye material y práctica en laboratorio.",
+    },
   },
   {
     slug: "scada-y-hmi",
@@ -70,7 +99,7 @@ export const courses: Course[] = [
     description:
       "Formación enfocada en la capa de supervisión: cómo se construyen interfaces de operador claras, cómo se gestionan alarmas y tendencias, y cómo un sistema SCADA permite tomar decisiones sobre el proceso en tiempo real.",
     level: "Inicial",
-    duration: "36 horas",
+    hours: 36,
     modalities: ["Presencial", "En línea"],
     icon: Gauge,
     audience: [
@@ -83,6 +112,12 @@ export const courses: Course[] = [
       "Configurar alarmas, históricos y tendencias",
       "Comunicar HMI y SCADA con el controlador",
       "Interpretar información para mejorar el proceso",
+    ],
+    includes: [
+      "Certificado de aprobación",
+      "Material técnico digital",
+      "Proyecto de supervisión guiado",
+      "Grabación de las sesiones en línea",
     ],
     modules: [
       {
@@ -110,6 +145,29 @@ export const courses: Course[] = [
         ],
       },
     ],
+    schedules: [
+      {
+        label: "Grupo de tarde",
+        startDate: "2026-11-16",
+        endDate: "2026-12-11",
+        modality: "Presencial",
+        time: "Martes y jueves · 18:30 a 21:30",
+        seats: 16,
+      },
+      {
+        label: "Grupo en línea",
+        startDate: "2027-02-08",
+        endDate: "2027-03-05",
+        modality: "En línea",
+        time: "Martes y jueves · 19:00 a 22:00",
+        seats: 20,
+      },
+    ],
+    investment: {
+      usd: 300,
+      unit: "por participante",
+      note: "Modalidad en línea: 280 USD por participante.",
+    },
   },
   {
     slug: "redes-industriales-e-industria-4-0",
@@ -121,7 +179,7 @@ export const courses: Course[] = [
     description:
       "Programa dedicado a las comunicaciones que sostienen la fábrica conectada: protocolos industriales, segmentación de redes, integración de equipos y los conceptos base de IIoT y analítica de datos de planta.",
     level: "Intermedio",
-    duration: "40 horas",
+    hours: 40,
     modalities: ["Presencial", "En línea", "A medida"],
     icon: Network,
     audience: [
@@ -134,6 +192,12 @@ export const courses: Course[] = [
       "Estructurar y documentar una red de planta",
       "Integrar equipos y diagnosticar comunicaciones",
       "Aplicar conceptos de IIoT y datos de proceso",
+    ],
+    includes: [
+      "Certificado de aprobación",
+      "Material técnico digital",
+      "Ejercicios de integración entre equipos",
+      "Guía de buenas prácticas de red",
     ],
     modules: [
       {
@@ -161,6 +225,29 @@ export const courses: Course[] = [
         ],
       },
     ],
+    schedules: [
+      {
+        label: "Grupo de sábados",
+        startDate: "2026-11-23",
+        endDate: "2026-12-19",
+        modality: "Presencial",
+        time: "Sábados · 08:00 a 13:00",
+        seats: 12,
+      },
+      {
+        label: "Grupo en línea",
+        startDate: "2027-01-18",
+        endDate: "2027-02-12",
+        modality: "En línea",
+        time: "Lunes y miércoles · 19:00 a 22:00",
+        seats: 18,
+      },
+    ],
+    investment: {
+      usd: 380,
+      unit: "por participante",
+      note: "Incluye prácticas de integración con equipos de laboratorio.",
+    },
   },
   {
     slug: "instrumentacion-y-calibracion",
@@ -172,7 +259,7 @@ export const courses: Course[] = [
     description:
       "Formación práctica sobre la medición industrial: tipos de sensores, configuración de transmisores, lazos de corriente, verificación y calibración de instrumentos para garantizar mediciones confiables.",
     level: "Inicial",
-    duration: "32 horas",
+    hours: 32,
     modalities: ["Presencial", "A medida"],
     icon: RadioTower,
     audience: [
@@ -185,6 +272,12 @@ export const courses: Course[] = [
       "Cablear y configurar lazos de medición",
       "Realizar verificación y calibración básica",
       "Documentar resultados y trazabilidad",
+    ],
+    includes: [
+      "Certificado de aprobación",
+      "Material técnico digital",
+      "Práctica con patrones de calibración",
+      "Formatos de registro y trazabilidad",
     ],
     modules: [
       {
@@ -212,6 +305,29 @@ export const courses: Course[] = [
         ],
       },
     ],
+    schedules: [
+      {
+        label: "Grupo de tarde",
+        startDate: "2026-12-07",
+        endDate: "2026-12-23",
+        modality: "Presencial",
+        time: "Lunes a jueves · 18:00 a 21:00",
+        seats: 14,
+      },
+      {
+        label: "Grupo de febrero",
+        startDate: "2027-02-15",
+        endDate: "2027-03-03",
+        modality: "Presencial",
+        time: "Lunes a jueves · 18:00 a 21:00",
+        seats: 14,
+      },
+    ],
+    investment: {
+      usd: 280,
+      unit: "por participante",
+      note: "Incluye uso de patrones y banco de calibración.",
+    },
   },
   {
     slug: "robotica-industrial",
@@ -223,7 +339,7 @@ export const courses: Course[] = [
     description:
       "Programa orientado a la operación y programación básica de celdas robotizadas: tipos de robots, sistemas de coordenadas, programación de trayectorias, herramientas y criterios de seguridad.",
     level: "Intermedio",
-    duration: "40 horas",
+    hours: 40,
     modalities: ["Presencial", "A medida"],
     icon: Bot,
     audience: [
@@ -236,6 +352,12 @@ export const courses: Course[] = [
       "Programar movimientos y trayectorias",
       "Configurar herramientas y marcos de referencia",
       "Aplicar criterios básicos de seguridad",
+    ],
+    includes: [
+      "Certificado de aprobación",
+      "Material técnico digital",
+      "Práctica de programación en celda didáctica",
+      "Checklist de seguridad de celda",
     ],
     modules: [
       {
@@ -263,6 +385,29 @@ export const courses: Course[] = [
         ],
       },
     ],
+    schedules: [
+      {
+        label: "Grupo de enero",
+        startDate: "2027-01-12",
+        endDate: "2027-02-06",
+        modality: "Presencial",
+        time: "Martes y jueves · 18:00 a 21:00",
+        seats: 10,
+      },
+      {
+        label: "Grupo de marzo",
+        startDate: "2027-03-09",
+        endDate: "2027-04-03",
+        modality: "Presencial",
+        time: "Martes y jueves · 18:00 a 21:00",
+        seats: 10,
+      },
+    ],
+    investment: {
+      usd: 420,
+      unit: "por participante",
+      note: "Cupos limitados por el número de estaciones de práctica.",
+    },
   },
   {
     slug: "variadores-y-motion-control",
@@ -274,7 +419,7 @@ export const courses: Course[] = [
     description:
       "Formación técnica sobre accionamientos eléctricos: configuración y parametrización de variadores de frecuencia, control de velocidad, rampas y fundamentos de movimiento y posicionamiento.",
     level: "Intermedio",
-    duration: "36 horas",
+    hours: 36,
     modalities: ["Presencial", "En línea"],
     icon: Activity,
     audience: [
@@ -287,6 +432,12 @@ export const courses: Course[] = [
       "Ajustar rampas, límites y protecciones",
       "Comprender esquemas de control de velocidad",
       "Introducirse en movimiento y posicionamiento",
+    ],
+    includes: [
+      "Certificado de aprobación",
+      "Material técnico digital",
+      "Práctica de parametrización en banco de motores",
+      "Guía de protecciones y alarmas",
     ],
     modules: [
       {
@@ -314,7 +465,45 @@ export const courses: Course[] = [
         ],
       },
     ],
+    schedules: [
+      {
+        label: "Grupo de tarde",
+        startDate: "2026-11-30",
+        endDate: "2026-12-22",
+        modality: "Presencial",
+        time: "Lunes y miércoles · 18:30 a 21:30",
+        seats: 12,
+      },
+      {
+        label: "Grupo en línea",
+        startDate: "2027-02-01",
+        endDate: "2027-02-24",
+        modality: "En línea",
+        time: "Lunes y miércoles · 19:00 a 22:00",
+        seats: 20,
+      },
+    ],
+    investment: {
+      usd: 310,
+      unit: "por participante",
+      note: "Incluye práctica con banco de motores y variadores.",
+    },
   },
+];
+
+const MONTHS = [
+  "ene",
+  "feb",
+  "mar",
+  "abr",
+  "may",
+  "jun",
+  "jul",
+  "ago",
+  "sep",
+  "oct",
+  "nov",
+  "dic",
 ];
 
 export function getCourse(slug: string): Course | undefined {
@@ -325,5 +514,49 @@ export function getCourseSlugs(): string[] {
   return courses.map((course) => course.slug);
 }
 
+export function formatDuration(hours: number): string {
+  return `${hours} horas`;
+}
+
+export function formatDateLabel(isoDate: string): string {
+  const [year, month, day] = isoDate.split("-");
+  const monthName = MONTHS[Number(month) - 1] ?? month;
+
+  return `${day} ${monthName} ${year}`;
+}
+
+export function formatDateRange(startDate: string, endDate?: string): string {
+  if (!endDate) {
+    return formatDateLabel(startDate);
+  }
+
+  const [startYear] = startDate.split("-");
+  const [endYear, endMonth, endDay] = endDate.split("-");
+  const endLabel =
+    startYear === endYear
+      ? `${endDay} ${MONTHS[Number(endMonth) - 1] ?? endMonth}`
+      : formatDateLabel(endDate);
+
+  return `${formatDateLabel(startDate)} al ${endLabel}`;
+}
+
+export function getSchedules(course: Course): CourseSchedule[] {
+  return [...course.schedules].sort((a, b) =>
+    a.startDate.localeCompare(b.startDate),
+  );
+}
+
+export function getNextSchedule(course: Course): CourseSchedule | undefined {
+  return getSchedules(course)[0];
+}
+
+export function formatInvestment(course: Course): string {
+  if (!course.investment) {
+    return "Cotización a medida";
+  }
+
+  return `USD ${course.investment.usd} ${course.investment.unit}`;
+}
+
 export const catalogNote =
-  "Programas ilustrativos. Fechas, precios y disponibilidad se confirmarán al publicar la oferta comercial.";
+  "Programas, fechas y valores referenciales de ejemplo. La disponibilidad y la inversión final se confirman en la propuesta comercial.";

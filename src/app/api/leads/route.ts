@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { notifyNewLead } from "@/features/leads/emails";
 import { leadSchema } from "@/schemas/lead";
 
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -123,6 +124,12 @@ export async function POST(request: Request) {
         ${clientKey}
       )
     `;
+
+    try {
+      await notifyNewLead(data);
+    } catch (error) {
+      console.error("La solicitud se guardó pero no se pudo notificar", error);
+    }
 
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (error) {

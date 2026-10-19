@@ -9,6 +9,21 @@ export type CourseModule = {
   topics: string[];
 };
 
+export type CourseSchedule = {
+  label: string;
+  startDate: string;
+  endDate?: string;
+  modality: CourseModality;
+  time: string;
+  seats: number;
+};
+
+export type CourseInvestment = {
+  usd: number;
+  unit: string;
+  note?: string;
+};
+
 export type Course = {
   slug: string;
   code: string;
@@ -17,10 +32,13 @@ export type Course = {
   summary: string;
   description: string;
   level: CourseLevel;
-  duration: string;
+  hours: number;
   modalities: CourseModality[];
   icon: LucideIcon;
   audience: string[];
   outcomes: string[];
+  includes: string[];
   modules: CourseModule[];
+  schedules: CourseSchedule[];
+  investment: CourseInvestment | null;
 };

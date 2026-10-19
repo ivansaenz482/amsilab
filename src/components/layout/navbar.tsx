@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Cpu, Menu, X, ArrowUpRight } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight, Cpu, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const links = [
@@ -12,7 +13,14 @@ const links = [
   { href: "/servicios", label: "Servicios" },
 ];
 
+const mobileLinks = [...links, { href: "/recursos", label: "Recursos" }];
+
+function isActive(pathname: string, href: string): boolean {
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -26,13 +34,8 @@ export function Navbar() {
 
   return (
     <header className="navbar">
-      <Link
-        href="/"
-        className="brand"
-        aria-label="AMSILAB, inicio"
-        onClick={() => setOpen(false)}
-      >
-        <span className="brand-mark">
+      <Link href="/" className="brand" aria-label="AMSILAB, inicio">
+        <span className="brand-mark" aria-hidden="true">
           <Cpu size={23} strokeWidth={1.8} />
         </span>
         <span>
@@ -45,7 +48,11 @@ export function Navbar() {
 
       <nav className="desktop-nav" aria-label="Navegación principal">
         {links.map((link) => (
-          <Link key={link.href} href={link.href}>
+          <Link
+            key={link.href}
+            href={link.href}
+            aria-current={isActive(pathname, link.href) ? "page" : undefined}
+          >
             {link.label}
           </Link>
         ))}
@@ -54,9 +61,9 @@ export function Navbar() {
       <Link
         href="/contacto"
         className="nav-cta"
-        onClick={() => setOpen(false)}
+        aria-current={isActive(pathname, "/contacto") ? "page" : undefined}
       >
-        Hablemos <ArrowUpRight size={16} />
+        Hablemos <ArrowUpRight size={16} aria-hidden="true" />
       </Link>
 
       <button
@@ -67,36 +74,32 @@ export function Navbar() {
         aria-controls="mobile-navigation"
         onClick={() => setOpen((value) => !value)}
       >
-        {open ? <X size={24} /> : <Menu size={24} />}
+        {open ? (
+          <X size={24} aria-hidden="true" />
+        ) : (
+          <Menu size={24} aria-hidden="true" />
+        )}
       </button>
 
       <nav
         id="mobile-navigation"
         className={`mobile-nav${open ? " is-open" : ""}`}
         aria-label="Navegación móvil"
-        aria-hidden={!open}
       >
-        {links.map((link) => (
+        {mobileLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            onClick={() => setOpen(false)}
             tabIndex={open ? 0 : -1}
+            aria-current={isActive(pathname, link.href) ? "page" : undefined}
           >
             {link.label}
           </Link>
         ))}
         <Link
-          href="/recursos"
-          onClick={() => setOpen(false)}
-          tabIndex={open ? 0 : -1}
-        >
-          Recursos
-        </Link>
-        <Link
           href="/contacto"
-          onClick={() => setOpen(false)}
           tabIndex={open ? 0 : -1}
+          aria-current={isActive(pathname, "/contacto") ? "page" : undefined}
         >
           Contacto
         </Link>

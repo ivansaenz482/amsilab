@@ -35,7 +35,7 @@ export function SectionPage({
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main-content">
         <section className="page-hero">
           <div className="hero-grid" />
           <div className="page-hero-content">

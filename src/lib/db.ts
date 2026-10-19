@@ -2,6 +2,10 @@ import { neon, type NeonQueryFunction } from "@neondatabase/serverless";
 
 let client: NeonQueryFunction<false, false> | null = null;
 
+export function isDatabaseConfigured(): boolean {
+  return Boolean(process.env.DATABASE_URL);
+}
+
 export function getDb(): NeonQueryFunction<false, false> | null {
   const url = process.env.DATABASE_URL;
 
