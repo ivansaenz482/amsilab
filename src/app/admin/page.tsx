@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import {
   ArrowUpRight,
   Download,
@@ -28,6 +27,7 @@ import {
   type LeadInterest,
 } from "@/schemas/lead";
 import { logoutAction } from "./login/actions";
+import { LoginCard } from "./login/login-card";
 import { updateStatusAction } from "./actions";
 
 export const instant = false;
@@ -110,8 +110,25 @@ function LeadItem({ lead }: { lead: LeadRecord }) {
 }
 
 export default async function AdminPage(props: PageProps<"/admin">) {
+  if (!isAdminConfigured()) {
+    return (
+      <main id="main-content" className="admin-login">
+        <div className="admin-login-card">
+          <p className="form-error" role="alert">
+            El panel todavía no está configurado. Define ADMIN_PASSWORD y
+            ADMIN_SESSION_SECRET en el entorno del proyecto.
+          </p>
+        </div>
+      </main>
+    );
+  }
+
   if (!(await isAdminAuthenticated())) {
-    redirect("/admin/login");
+    return (
+      <main id="main-content" className="admin-login">
+        <LoginCard notice="Tu sesión terminó. Vuelve a iniciar sesión para continuar." />
+      </main>
+    );
   }
 
   const searchParams = await props.searchParams;
@@ -163,12 +180,6 @@ export default async function AdminPage(props: PageProps<"/admin">) {
             se envían desde tu cliente de correo habitual.
           </p>
         </div>
-
-        {!isAdminConfigured() ? (
-          <p className="form-error" role="alert">
-            Falta configurar ADMIN_PASSWORD y ADMIN_SESSION_SECRET.
-          </p>
-        ) : null}
 
         {!databaseReady ? (
           <p className="form-error" role="alert">

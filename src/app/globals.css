@@ -2080,6 +2080,17 @@ a:focus-visible {
   justify-self: start;
 }
 
+.admin-notice {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid rgb(66 232 213 / 35%);
+  border-radius: 4px;
+  background: rgb(66 232 213 / 7%);
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 @media (max-width: 1050px) {
   .schedule-grid {
     grid-template-columns: 1fr;
